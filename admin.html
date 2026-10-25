@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b16">
+  <meta name="robots" content="noindex,nofollow">
+  <title>GameSphere Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#080a14;--panel:#111528;--text:#f4f3ff;--muted:#9ba3bd;--line:#ffffff18;--accent:#a779ff;--cyan:#67e8df}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 5%,#40297366,transparent 38%),radial-gradient(ellipse at 92% 25%,#087f8760,transparent 34%),linear-gradient(145deg,#080a14,#0d1021 55%,#090b16);color:var(--text);font:14px "DM Sans",sans-serif}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2000&q=80");background-position:center;background-size:cover;mask-image:linear-gradient(90deg,#000,transparent 90%)}
+    button,input,textarea{font:inherit}button{cursor:pointer}.splash{position:fixed;z-index:5;inset:0;display:grid;place-items:center;text-align:center;background:#080a14 url("https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1800&q=85") center/cover}
+    .splash:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,#080a14ed,#111329d9 56%,#080a14d9)}
+    .splash-card{position:relative;padding:42px 32px;animation:arrive .8s cubic-bezier(.2,.75,.25,1) both}.splash-mark{margin:auto;width:70px;height:70px;display:grid;place-items:center;border:1px solid #ffffff35;border-radius:22px;background:linear-gradient(135deg,#a779ff66,#63e6e255);box-shadow:0 0 58px #9b75ff88;font-size:35px}
+    .splash p{margin:24px 0 9px;color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase}.splash h1{margin:0;font:600 clamp(28px,6vw,52px) "Space Grotesk",sans-serif;letter-spacing:-1.5px}
+    @keyframes arrive{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:none}}.fade-out{animation:leave .45s ease forwards}@keyframes leave{to{opacity:0;visibility:hidden}}
+    .layout{position:relative;width:min(1180px,calc(100% - 36px));margin:auto;padding:34px 0 70px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:12px}.brand-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#a779ff,#6353de);box-shadow:0 6px 30px #9b75ff55;font-size:22px}
+    h1,h2,h3{font-family:"Space Grotesk",sans-serif}.brand h1{margin:0;font-size:21px}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}
+    .actions{display:flex;align-items:center;gap:10px}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:#ffffff08;color:#dadcf0;font-size:12px}
+    .button{min-height:40px;border:1px solid #ffffff28;border-radius:10px;padding:0 14px;background:#ffffff0c;color:var(--text);font-weight:700;transition:.2s}.button:hover{border-color:#a779ff99;transform:translateY(-1px)}.button.primary{border-color:transparent;background:linear-gradient(110deg,#a779ff,#7158e8);box-shadow:0 6px 24px #7655dd44}.button.danger{border-color:#ff668855;background:#ff526319;color:#ffb7be}
+    .welcome{position:relative;overflow:hidden;margin-bottom:22px;padding:25px 28px;border:1px solid #ffffff22;border-radius:20px;background:linear-gradient(105deg,#271d49dd,#14243ad9 70%),url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1400&q=80") center/cover;box-shadow:0 18px 55px #0005}
+    .welcome:after{content:"";position:absolute;right:8%;top:-100px;width:260px;height:260px;border-radius:50%;background:#9b75ff45;filter:blur(65px)}.welcome small{position:relative;z-index:1;color:var(--cyan);font-weight:700;letter-spacing:2px;text-transform:uppercase}.welcome h2{position:relative;z-index:1;margin:8px 0 5px;font-size:clamp(24px,4vw,36px)}.welcome p{position:relative;z-index:1;margin:0;color:#d0d2e1}
+    .notice{display:none;margin:0 0 18px;padding:13px 16px;border:1px solid #ffbd5966;border-radius:11px;background:#ffbd5912;color:#ffe1aa;line-height:1.5}.notice.show{display:block}.notice.error{border-color:#ff6f7866;background:#ff596812;color:#ffc6ca}
+    .columns{display:grid;grid-template-columns:1fr .9fr;gap:20px;align-items:start}.panel{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#151a2eee,#101425f2);box-shadow:0 14px 40px #0003;backdrop-filter:blur(18px);padding:22px}
+    .panel-head{display:flex;align-items:start;justify-content:space-between;gap:15px;margin-bottom:17px}.panel-head h2{margin:0;font-size:18px}.panel-head p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+    .game-list{display:grid;gap:10px}.game-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid #ffffff12;border-radius:12px;background:#ffffff05}.game-row strong{display:block;font-size:13px;overflow-wrap:anywhere}.game-row small{display:block;margin-top:5px;color:var(--muted);font-size:11px}.game-row a{color:#c5aaff;text-decoration:none}.game-row-actions{display:flex;align-items:center;gap:8px}
+    .empty{padding:24px 12px;border:1px dashed #ffffff25;border-radius:12px;color:var(--muted);text-align:center;font-size:13px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{color:#d8daea;font-size:12px;font-weight:700}.field input,.field textarea{width:100%;min-height:40px;border:1px solid #ffffff20;border-radius:9px;padding:10px 11px;background:#090d1b;color:var(--text);outline:none}.field textarea{min-height:76px;resize:vertical;line-height:1.5}.field input:focus,.field textarea:focus{border-color:#a779ff99}
+    .color-field{display:flex;align-items:center;gap:10px}.color-field input[type=color]{width:43px;height:37px;padding:3px;border:1px solid #ffffff25;border-radius:9px;background:#090d1b}.color-field code{color:var(--muted);font-size:12px}
+    .maintenance{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px;border:1px solid #ffb44e33;border-radius:12px;background:#ffb44e0b}.maintenance strong{display:block;font-size:13px}.maintenance small{display:block;margin-top:5px;color:var(--muted);line-height:1.5}.switch{width:46px;height:26px;appearance:none;border:1px solid #ffffff2a;border-radius:999px;background:#34394d;position:relative;cursor:pointer;flex:none}.switch:checked{background:#d28737}.switch:before{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .18s}.switch:checked:before{transform:translateX(20px)}
+    .preview{height:140px;margin-top:8px;border:1px solid #ffffff1d;border-radius:11px;background:#111425 center/cover no-repeat}.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.help{margin:12px 0 0;color:var(--muted);font-size:11px;line-height:1.55}
+    .foot{margin-top:20px;color:#777e99;font-size:11px;text-align:center}
+    @media(max-width:850px){.columns{grid-template-columns:1fr}}@media(max-width:580px){.layout{width:calc(100% - 24px);padding-top:18px}.top{align-items:flex-start}.pill{display:none}.welcome{padding:21px}.panel{padding:16px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.game-row{align-items:flex-start;flex-direction:column}.game-row-actions{width:100%;justify-content:flex-end}}
+  </style>
+</head>
+<body>
+  <div class="splash" id="splash" aria-label="Welcome">
+    <div class="splash-card"><div class="splash-mark">◈</div><p>GameSphere control room</p><h1>Welcome, Anubhav Sharma</h1></div>
+  </div>
+  <main class="layout">
+    <header class="top">
+      <div class="brand"><span class="brand-mark">◈</span><div><h1>GameSphere Admin</h1><p>Private site controls</p></div></div>
+      <div class="actions"><span class="pill">Cloudflare Access required</span><a class="button" href="/cdn-cgi/access/logout">Sign out</a></div>
+    </header>
+    <section class="welcome"><small>Good to see you</small><h2>Welcome back, Anubhav Sharma.</h2><p>Manage the game library, site availability, and the look of GameSphere.</p></section>
+    <div class="notice" id="notice" role="status" aria-live="polite"></div>
+    <div class="columns">
+      <section class="panel">
+        <div class="panel-head"><div><h2>Published games</h2><p>Remove a published game and all its stored files. This cannot be undone.</p></div><button class="button" id="refresh-games" type="button">Refresh</button></div>
+        <div class="game-list" id="game-list"><div class="empty">Loading game catalogue…</div></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><div><h2>Website appearance</h2><p>Changes are saved centrally and apply to all site visitors.</p></div></div>
+        <form id="settings-form">
+          <div class="maintenance"><div><strong>Pause GameSphere and published games</strong><small>The website, APIs, and direct game links show a maintenance page. This admin page stays available.</small></div><input class="switch" id="maintenance" type="checkbox" aria-label="Pause GameSphere and published games"></div>
+          <div class="form-grid" style="margin-top:16px">
+            <div class="field full"><label for="hero-headline">Hero headline</label><input id="hero-headline" maxlength="100" required></div>
+            <div class="field full"><label for="hero-tagline">Hero description</label><textarea id="hero-tagline" maxlength="240"></textarea></div>
+            <div class="field full"><label for="hero-image">Hero background image URL (HTTPS)</label><input id="hero-image" type="url" required><div class="preview" id="hero-preview" aria-label="Hero image preview"></div></div>
+            <div class="field full"><label>Featured game images (HTTPS URLs)</label></div>
+            <div class="field"><label for="image-1">Starfall Odyssey</label><input id="image-1" type="url" required></div>
+            <div class="field"><label for="image-2">Wildwood</label><input id="image-2" type="url" required></div>
+            <div class="field"><label for="image-3">Neon Drift</label><input id="image-3" type="url" required></div>
+            <div class="field"><label for="image-4">Featured game 4</label><input id="image-4" type="url" required></div>
+            <div class="field full"><label>Website colors</label></div>
+            <div class="field"><label for="color-background">Background</label><div class="color-field"><input id="color-background" type="color"><code id="color-background-value"></code></div></div>
+            <div class="field"><label for="color-panel">Cards / panels</label><div class="color-field"><input id="color-panel" type="color"><code id="color-panel-value"></code></div></div>
+            <div class="field"><label for="color-text">Main text</label><div class="color-field"><input id="color-text" type="color"><code id="color-text-value"></code></div></div>
+            <div class="field"><label for="color-accent">Accent</label><div class="color-field"><input id="color-accent" type="color"><code id="color-accent-value"></code></div></div>
+            <div class="field"><label for="color-highlight">Highlight</label><div class="color-field"><input id="color-highlight" type="color"><code id="color-highlight-value"></code></div></div>
+          </div>
+          <p class="help">Image changes use public HTTPS image URLs. Keep image assets available at their URL. Use an owned or licensed image source.</p>
+          <div class="form-actions"><button class="button" id="reload-settings" type="button">Reload</button><button class="button primary" id="save-settings" type="submit">Save changes</button></div>
+        </form>
+      </section>
+    </div>
+    <p class="foot">Administrative changes are applied to the live site. Confirm destructive actions carefully.</p>
+  </main>
+
+  <script>
+    const byId = id => document.getElementById(id);
+    const notice = byId("notice");
+    const gameList = byId("game-list");
+    const colorKeys = ["background", "panel", "text", "accent", "highlight"];
+    let noticeTimeout;
+
+    function showNotice(message, error = false) {
+      notice.textContent = message;
+      notice.classList.toggle("error", error);
+      notice.classList.add("show");
+      clearTimeout(noticeTimeout);
+      noticeTimeout = setTimeout(() => notice.classList.remove("show"), 7000);
+    }
+
+    async function adminFetch(path, options = {}) {
+      const response = await fetch(path, {
+        cache: "no-store",
+        credentials: "same-origin",
+        ...options,
+        headers: { Accept: "application/json", ...(options.headers || {}) }
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          throw new Error("Admin sign-in is required or your account is not authorized.");
+        }
+        throw new Error(result.error || `Admin request failed with status ${response.status}.`);
+      }
+      return result;
+    }
+
+    function renderGames(games) {
+      gameList.replaceChildren();
+      if (!games.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "No published games yet.";
+        gameList.appendChild(empty);
+        return;
+      }
+      for (const game of games) {
+        const row = document.createElement("article");
+        row.className = "game-row";
+        const details = document.createElement("div");
+        const name = document.createElement("strong");
+        name.textContent = game.name;
+        const date = document.createElement("small");
+        date.textContent = game.publishedAt ? `Published ${new Date(game.publishedAt).toLocaleString()}` : "Published game";
+        const link = document.createElement("a");
+        link.href = game.playUrl;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Open";
+        const actions = document.createElement("div");
+        actions.className = "game-row-actions";
+        const remove = document.createElement("button");
+        remove.className = "button danger";
+        remove.type = "button";
+        remove.textContent = "Delete permanently";
+        remove.addEventListener("click", async () => {
+          if (!confirm(`Permanently delete "${game.name}" and all of its uploaded files? This cannot be undone.`)) return;
+          remove.disabled = true;
+          try {
+            const result = await adminFetch("/api/admin/games", {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id: game.id })
+            });
+            showNotice(`Deleted "${game.name}" and ${result.deletedObjects} stored objects.`);
+            await loadGames();
+          } catch (error) {
+            showNotice(error.message, true);
+            remove.disabled = false;
+          }
+        });
+        details.append(name, date);
+        actions.append(link, remove);
+        row.append(details, actions);
+        gameList.appendChild(row);
+      }
+    }
+
+    async function loadGames() {
+      gameList.innerHTML = '<div class="empty">Loading game catalogue…</div>';
+      try {
+        const { games } = await adminFetch("/api/admin/games");
+        renderGames(Array.isArray(games) ? games : []);
+      } catch (error) {
+        gameList.innerHTML = "";
+        const message = document.createElement("div");
+        message.className = "empty";
+        message.textContent = error.message;
+        gameList.appendChild(message);
+      }
+    }
+
+    function setColor(key, value) {
+      const input = byId(`color-${key}`);
+      const code = byId(`color-${key}-value`);
+      input.value = value;
+      code.textContent = value.toUpperCase();
+    }
+
+    function showHeroPreview(url) {
+      try {
+        const parsed = new URL(url);
+        if (parsed.protocol !== "https:") throw new Error("Image URL must use HTTPS.");
+        byId("hero-preview").style.backgroundImage = `url("${parsed.href}")`;
+      } catch {
+        byId("hero-preview").style.backgroundImage = "";
+      }
+    }
+
+    async function loadSettings() {
+      try {
+        const settings = await adminFetch("/api/admin/settings");
+        byId("maintenance").checked = settings.maintenance;
+        byId("hero-headline").value = settings.heroHeadline;
+        byId("hero-tagline").value = settings.heroTagline;
+        byId("hero-image").value = settings.heroImageUrl;
+        settings.featuredImageUrls.forEach((url, index) => { byId(`image-${index + 1}`).value = url; });
+        for (const key of colorKeys) setColor(key, settings.colors[key]);
+        showHeroPreview(settings.heroImageUrl);
+      } catch (error) {
+        showNotice(error.message, true);
+      }
+    }
+
+    for (const key of colorKeys) {
+      byId(`color-${key}`).addEventListener("input", event => {
+        byId(`color-${key}-value`).textContent = event.target.value.toUpperCase();
+      });
+    }
+    byId("hero-image").addEventListener("input", event => showHeroPreview(event.target.value));
+    byId("refresh-games").addEventListener("click", loadGames);
+    byId("reload-settings").addEventListener("click", loadSettings);
+    byId("settings-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      const maintenance = byId("maintenance").checked;
+      if (maintenance && !confirm("Pause the GameSphere website and all published game links now? Your admin page will remain available.")) return;
+      const settings = {
+        maintenance,
+        heroHeadline: byId("hero-headline").value.trim(),
+        heroTagline: byId("hero-tagline").value.trim(),
+        heroImageUrl: byId("hero-image").value.trim(),
+        featuredImageUrls: [1, 2, 3, 4].map(index => byId(`image-${index}`).value.trim()),
+        colors: Object.fromEntries(colorKeys.map(key => [key, byId(`color-${key}`).value]))
+      };
+      const button = byId("save-settings");
+      button.disabled = true;
+      try {
+        await adminFetch("/api/admin/settings", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(settings)
+        });
+        showNotice(maintenance ? "Settings saved. The website and published game links are now paused." : "Website and game links are back online.");
+      } catch (error) {
+        showNotice(error.message, true);
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    setTimeout(() => byId("splash").classList.add("fade-out"), 1450);
+    Promise.all([loadGames(), loadSettings()]);
+  </script>
+</body>
+</html>

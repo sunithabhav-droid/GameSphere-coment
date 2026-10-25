@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b16">
+  <meta name="description" content="Sign in to your GameSphere account.">
+  <title>Sign in — GameSphere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#090b16;--panel:#111425;--text:#f5f5fb;--muted:#a2a6bd;--purple:#9b75ff;--line:rgba(255,255,255,.1)}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;grid-template-rows:auto 1fr auto;background:radial-gradient(ellipse at 50% 20%,#31265d 0,transparent 48%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif}
+    a{color:inherit;text-decoration:none}
+    .topbar,.footer{width:min(1120px,calc(100% - 40px));margin:auto}
+    .topbar{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:11px;font:700 21px "Space Grotesk",sans-serif}
+    .brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,#a77aff,#6952e9);box-shadow:0 0 24px #8a66ff55}
+    .back-link{color:#c7b4ff;font-size:13px;font-weight:600}
+    main{display:grid;place-items:center;padding:36px 20px}
+    .signin-card{width:min(100%,480px);padding:34px;border:1px solid #ffffff18;border-radius:22px;background:linear-gradient(145deg,#171a30ed,#101222f2);box-shadow:0 24px 80px #0007}
+    .eyebrow{color:#85e9e4;text-transform:uppercase;font-size:10px;font-weight:700;letter-spacing:2px}
+    h1{margin:10px 0 8px;font:700 31px "Space Grotesk",sans-serif;letter-spacing:-1px}
+    .intro,.setup-note,.status{color:var(--muted);font-size:13px;line-height:1.6}
+    .intro{margin:0 0 24px}
+    .provider-list{display:grid;gap:10px}
+    .provider-button{width:100%;min-height:47px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #ffffff20;border-radius:11px;background:#ffffff08;color:var(--text);font-weight:600;font-size:13px;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
+    .provider-button:not(:disabled):hover{transform:translateY(-1px);border-color:#b59aff88;background:#ffffff10}
+    .provider-button:disabled{opacity:.45;cursor:not-allowed}
+    .provider-mark{width:22px;height:22px;display:grid;place-items:center;border-radius:6px;background:#ffffff13;color:#ded3ff;font:700 12px "Space Grotesk",sans-serif}
+    .divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:#858aa2;font-size:11px}
+    .divider:before,.divider:after{content:"";height:1px;flex:1;background:var(--line)}
+    .gamesphere-button{background:linear-gradient(110deg,#a679ff,#7858ec);border-color:transparent}
+    .gamesphere-button:not(:disabled):hover{background:linear-gradient(110deg,#b28aff,#8969f4)}
+    .status{min-height:22px;margin:14px 0 0;text-align:center}
+    .setup-note{margin:18px 0 0;padding:12px;border:1px solid #ffd16630;border-radius:10px;background:#ffd1660b;color:#d6c89e;font-size:11px}
+    .account-panel{display:grid;gap:12px;text-align:center}
+    .account-panel[hidden],.setup-note[hidden]{display:none}
+    .account-name{overflow-wrap:anywhere;color:#d2bdff}
+    .footer{padding:20px 0 26px;border-top:1px solid var(--line);color:#85899f;font-size:11px;text-align:center}
+    .small-button{min-height:40px;border:1px solid #ffffff24;border-radius:10px;background:#ffffff0b;color:var(--text);font-weight:600;cursor:pointer}
+    @media(max-width:520px){.signin-card{padding:26px 20px}.topbar{height:68px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="GameSphere home"><span class="brand-mark">◈</span>GameSphere</a>
+    <a class="back-link" href="/">Back to games</a>
+  </header>
+  <main>
+    <section class="signin-card" aria-labelledby="page-title">
+      <div id="signin-content">
+        <div class="eyebrow">Welcome to the Sphere</div>
+        <h1 id="page-title">Sign in</h1>
+        <p class="intro">Choose an account to continue to GameSphere.</p>
+        <div class="provider-list" aria-label="Sign-in providers">
+          <button class="provider-button" type="button" data-connection="google"><span class="provider-mark">G</span>Continue with Google</button>
+          <button class="provider-button" type="button" data-connection="microsoft"><span class="provider-mark">M</span>Continue with Microsoft</button>
+          <button class="provider-button" type="button" data-connection="yahoo"><span class="provider-mark">Y</span>Continue with Yahoo</button>
+          <button class="provider-button" type="button" data-connection="facebook"><span class="provider-mark">f</span>Continue with Facebook</button>
+          <button class="provider-button" type="button" data-connection="apple"><span class="provider-mark">A</span>Continue with Apple</button>
+          <button class="provider-button" type="button" data-connection="epic"><span class="provider-mark">E</span>Continue with Epic Games</button>
+        </div>
+        <div class="divider">OR</div>
+        <button class="provider-button gamesphere-button" id="gamesphere-signin" type="button" data-connection="gamesphere"><span class="provider-mark">◈</span>Sign in with GameSphere</button>
+        <p class="status" id="signin-status" role="status" aria-live="polite"></p>
+        <p class="setup-note" id="setup-note" hidden>Sign-in is not configured yet. The site owner must configure Auth0 and enable the selected provider connection before sign-in can be used.</p>
+      </div>
+      <div class="account-panel" id="account-panel" hidden>
+        <div class="eyebrow">You are signed in</div>
+        <h1>Welcome to GameSphere</h1>
+        <p class="account-name" id="account-name"></p>
+        <a class="provider-button gamesphere-button" id="continue-link" href="/">Continue to GameSphere</a>
+        <button class="small-button" id="signout-button" type="button">Sign out</button>
+        <p class="status" id="account-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">© 2026 GameSphere. Made for the love of play.</footer>
+  <script src="./gamesphere-config.js"></script>
+  <script defer src="./signin.js"></script>
+</body>
+</html>

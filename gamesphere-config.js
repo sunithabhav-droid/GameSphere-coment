@@ -1,0 +1,1 @@
+window.GAMESPHERE_CONFIG = {"turnstileSiteKey":"","auth0":{"domain":"","clientId":"","connections":{"google":"google-oauth2","microsoft":"windowslive","yahoo":"yahoo","facebook":"facebook","apple":"apple","epic":"","gamesphere":"Username-Password-Authentication"}}};
